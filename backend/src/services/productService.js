@@ -1,5 +1,5 @@
 const pool = require('../config/database');
-const { scrapeSteamGame } = require('../utils/scrapeSteamGame');
+const { scrapeSteamGame } = require('../scrapers/steamScraper')
 
 // Valida se a URL é da Steam
 function isValidSteamUrl(url) {
