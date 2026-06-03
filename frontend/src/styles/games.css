@@ -1,0 +1,128 @@
+.games-section {
+  width: 100%;
+  padding: 20px 24px;
+  flex: 1;
+}
+
+.section-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text3);
+}
+
+.section-count {
+  font-size: 12px;
+  color: var(--text3);
+}
+
+.empty {
+  font-size: 13px;
+  color: var(--text3);
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.game-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background .15s;
+  margin-bottom: 2px;
+  border-left: 2px solid transparent;
+}
+
+.game-card:hover { background: var(--bg2); }
+
+.game-card.active {
+  background: var(--bg3);
+  border-left-color: var(--accent);
+}
+
+.game-thumb {
+  width: 54px;
+  height: 30px;
+  border-radius: 5px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 0.5px solid var(--border);
+  background: var(--bg3);
+}
+
+.game-thumb.placeholder { background: var(--bg3); }
+
+.game-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.game-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.game-email {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 2px;
+}
+
+.game-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.game-price {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.badge {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+.badge.orange { background: #e8722a22; color: var(--accent); }
+.badge.gray { background: #6e6e8222; color: var(--text2); }
+.badge.sm { font-size: 10px; padding: 1px 5px; }
+
+.btn-del {
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .15s, color .15s;
+  flex-shrink: 0;
+}
+
+.game-card:hover .btn-del { opacity: 1; }
+.btn-del:hover { color: var(--red); }
