@@ -1,6 +1,13 @@
 const pool = require('../config/database');
 const { scrapeSteamGame } = require('../scrapers/steamScraper')
 
+// Extrai o app_id da URL da Steam
+// Ex: https://store.steampowered.com/app/1245620/ELDEN_RING/ → "1245620"
+function extractAppId(url) {
+  const match = url.match(/\/app\/(\d+)/)
+  return match ? match[1] : null
+}
+
 // Valida se a URL é da Steam
 function isValidSteamUrl(url) {
   try {
@@ -17,25 +24,22 @@ async function createProduct(url, email) {
     throw new Error('URL inválida. Use uma URL da Steam no formato: https://store.steampowered.com/app/...')
   }
 
-  // Verifica se já existe esse produto com esse email
   const existing = await pool.query(
     'SELECT id FROM products WHERE url = $1 AND email = $2',
     [url, email]
   )
-
   if (existing.rows.length > 0) {
     throw new Error('Você já está monitorando esse jogo com esse e-mail.')
   }
 
-  // Raspa os dados da Steam
   const { title, price } = await scrapeSteamGame(url)
+  const appId = extractAppId(url)  // ← novo
 
-  // Salva no banco
   const result = await pool.query(
-    `INSERT INTO products (url, title, price, last_price, email)
-     VALUES ($1, $2, $3, $4, $5)
+    `INSERT INTO products (url, app_id, title, price, last_price, email)
+     VALUES ($1, $2, $3, $4, $5, $6)
      RETURNING *`,
-    [url, title, price, price, email]
+    [url, appId, title, price, price, email]  // ← app_id incluso
   )
 
   return result.rows[0]
